@@ -1,0 +1,29 @@
+{
+  "name": "ludolfc-panel",
+  "version": "1.0.0",
+  "description": "Control panel for LudolfC programming language",
+  "main": "index.html",
+  "scripts": {
+    "build": "webpack --mode=production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ludolf/panel.git"
+  },
+  "keywords": [
+    "ludolfc"
+  ],
+  "author": "Tomas Tulka (ttulka)",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/ludolf/panel/issues"
+  },
+  "homepage": "https://github.com/ludolf/panel#readme",
+  "dependencies": {
+    "ludolfc": "^0.0.0-alpha2"
+  },
+  "devDependencies": {
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
+  }
+}
