@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>LudolfC Control Panel</title>
+    <meta name="author" content="Tomas Tulka">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+    <meta charset="utf-8">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mansalva&family=Roboto&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap">
+    <link rel="stylesheet" type="text/css" href="index.css">    
+  </head>
+  <body>
+    <div id="menu-bg"></div>
+    <div id="main">
+      <div id="menu">
+        <div class="logo"></div>
+        <div>
+          <a href="#tips">💡</a>
+          <a href="https://github.com/ludolf/ludolfc" target="_blank">🏠</a>
+        </div>
+      </div>
+      <div id="panel">
+        <div class="panel__left">
+          <div id="position">1:1</div>
+          <div class="editor">
+            <div class="line-numbers"><span></span></div>
+            <textarea id="code" rows="13" spellcheck="false" wrap="off">
+i := 3
+while i &gt; 0 {
+  Display(i, "...")
+  i := i - 1
+}
+Display("Start!")
+Display(Map)</textarea>
+          </div>
+          <div id="errorMarker" class="errorMarker">&nbsp;</div>
+          <div class="controls">
+            <div class="controls__left">
+              <button class="char" type="button">{</button>
+              <button class="char" type="button">}</button>
+              <button class="char" type="button">&lt;</button>
+              <button class="char" type="button">&gt;</button>
+              <button class="char" type="button">(</button>
+              <button class="char" type="button">)</button>
+              <button class="char" type="button">:</button>
+              <button class="char" type="button">=</button>
+            </div>
+            <div class="controls__right">
+              <button id="runButton" class="run" type="button"></button>
+            </div>
+          </div>
+        </div>
+        <div class="panel__right">
+          <div id="display">
+            <div id="result"></div>
+            <table id="map"></table>
+          </div>
+        </div>
+      </div>
+      <div class="separator"><a name="tips"></a></div>
+      <div class="tips localization en">
+          <div>
+            <div>Assignment</div>
+            <code>
+              a1 := 1 + 2.3<br>
+              Hello := "Hello" + "World!"<br>
+              true_ := True<br>
+              <br>
+              four := 3 + 3 / 3<br>
+              two := (3 + 3) / 3<br>
+              five := four + 1<br>
+              <br>
+              false_ := five = 5 & five &lt; 5<br>
+              true_&nbsp; := false | true
+            </code>
+          </div>
+          <div>
+            <div>Arrays</div>
+            <code>
+              empty := []<br>
+              <br>
+              arr := [1,2,3]<br>
+              one := arr[0]<br>
+              arr[0] := 111<br>
+              <br>
+              multi := [[1],["abc", true]]<br>
+              one := multi[0,0]<br>
+              abc := multi[1,0]<br>
+              true_ := multi[1,1]
+            </code>
+          </div>
+          <div>
+            <div>Conditions</div>
+            <code>
+              if a = 1 {<br>
+              &nbsp; is_one := true<br>
+              }<br>
+              <br>
+              if a &gt; 1 {<br>
+              &nbsp; greater := true<br>
+              }<br>
+              else {<br>
+              &nbsp; greater := false<br>
+              }
+            </code>
+          </div>
+          <div>
+            <div>Loops</div>
+            <code>
+              i := 0<br>
+              while i &lt; 5 {<br>
+              &nbsp; i := i + 1<br>
+              }<br>
+              <br>
+              j := 1<br>
+              while j &lt; i {<br>
+              &nbsp; j := j + 1<br>
+              &nbsp; i := i - 1<br>
+              }
+            </code>
+          </div>
+          <div>
+            <div>Functions</div>
+            <code>
+              func_one := (){ 1 }<br>
+              three := func_one() + 2<br>
+              <br>
+              identity := (x){ x }<br>
+              four := identity(4)<br>
+              <br>
+              plus := (x,y){ x + y }<br>
+              five := plus(2,3)<br>
+              <br>
+              Display(1 + 2)<br>
+              <br>
+              display_1_2 := (){<br>
+              &nbsp; Display(1)<br>
+              &nbsp; Display(2)<br>
+              }<br>
+              display_1_2()
+            </code>
+          </div>
+          <div>
+            <div>Objects</div>
+            <code>
+              empty := {}<br>
+              <br>
+              position := { x:1, y:2 }<br>
+              x := position.x<br>
+              y := position.y<br>
+              <br>
+              robot := {<br>
+              &nbsp; name: "Ludolf",<br>
+              &nbsp; pos: position,<br>
+              &nbsp; move: (x,y){<br>
+              &nbsp; &nbsp; pos.x := x<br>
+              &nbsp; &nbsp; pos.y := y<br>
+              &nbsp; }<br>
+              }<br>
+              robot.move(5,8)<br>
+              Display(robot.pos)
+            </code>
+          </div>
+          <div>
+            <div>Ludolf & Display</div>
+            <code>
+              Display(Ludolf)<br>
+              <br>
+              Ludolf.up()<br>
+              Ludolf.down()<br>
+              Ludolf.right()<br>
+              Ludolf.left()<br>
+              <br>
+              Display(1)<br>
+              Display("Hello!")<br>
+              Display("x =", 123)
+            </code>
+          </div>
+      </div>
+      <div class="separator"><a name="tips"></a></div>
+      <div id="footer"><a href="https://github.com/ttulka" target="_blank">&copy; Tomas Tulka (ttulka)</a></div>
+    </div>
+    <script src="index.js"></script>
+  </body>
+</html>
