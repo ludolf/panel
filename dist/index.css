@@ -44,6 +44,7 @@ a {
 }
 #menu a {
     color: white;
+    margin-left: 0.5rem;
 }
 #menu .logo {
     width: 15rem;
@@ -253,12 +254,25 @@ textarea, code, pre, .errorMarker, #result {
 
 #footer {
     text-align: center;
-    margin: 2rem;
+    margin: 2rem 0.5rem;
     font-size: 1.5rem;
-    font-style: italic;
+}
+#footer div {
+    margin: 2rem 0;
 }
 #footer a {    
-    color: var(--primary);
+    color: var(--darker, silver);
+    margin: 0 0.5rem;
+}
+#footer a.localization-control {
+    color: var(--black);
+}
+
+.localization {
+    display: none;
+}
+.localization.current {
+    display: flex;
 }
 
 @media (max-width: 1200px) {
@@ -286,9 +300,12 @@ textarea, code, pre, .errorMarker, #result {
         padding: 0 0.5rem;
     }
     #menu .logo {
-        width: 15rem;
+        width: 10rem;
         background-size: auto 1.5rem;
         height: 1.5rem;
+    }
+    #menu a {
+        margin-left: 0.2rem;
     }
     .editor {
         gap: 0.7rem;
@@ -331,10 +348,15 @@ textarea, code, pre, .errorMarker, #result {
         font-size: 1rem;
         padding: 2rem 1rem;
     }
+    #footer a.localization-control {
+        font-size: 1rem;
+    }
 
     .tips {
-        display: block;
         font-size: 1.2rem;
+    }
+    .tips > div {
+        margin-bottom: 1.5rem;
     }
     .tips > div > div {
         padding: 0 0.8rem 0.2rem 0.8rem;
@@ -345,5 +367,8 @@ textarea, code, pre, .errorMarker, #result {
         min-width: initial;
         width: 100%;
         box-sizing: border-box;
+    }
+    .localization.current {
+        display: block;
     }
 }

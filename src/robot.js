@@ -36,7 +36,7 @@ const mapped = new lang.Object(robot)
 mapped.isRobot = true
 mapped.isProtected = true
 
-// localization cz/de
+// localization cs/de
 robot['nahoru'] = robot.up
 robot['nachOben'] = robot.up
 robot['dolů'] = robot.down

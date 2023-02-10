@@ -3,10 +3,13 @@ import { display, resetDisplay } from './display'
 import stringify from './stringify'
 import map from './map'
 import robot from './robot'
+import { changeLocale, snippet } from './localization'
+
+const displayLang = new lang.NativeFunction((...input) => display(...input))
 
 const imports = { 
-    Display: new lang.NativeFunction((...input) => display(...input)), 
-    Map: map.mapped,
+    Display: displayLang, Zobraz: displayLang, Darstellen: displayLang,
+    Map: map.mapped, Mapa: map.mapped, Karte: map.mapped,
     Ludolf: robot.mapped,
 }
 
@@ -39,7 +42,7 @@ runButton.addEventListener('click', async () => {
     runButton.classList.add('stop')
     mapTable.classList.remove('interrupted')
 
-    // reset scene
+    // reset scene to initial state
     map.reset()
     robot.reset()
 
@@ -129,10 +132,10 @@ function markError(line, pos) {
     if (!line || !pos) return
     errorMarker_line = line
     errorMarker_pos = pos
-
-    const num = lineNumbers.childNodes[line - 1]
-    const {top} = documentOffsetPosition(num)
+    
+    let {top} = documentOffsetPosition(lineNumbers)
     const {left} = documentOffsetPosition(codeTextarea)
+    top += lineNumbers.childNodes[0].offsetHeight * (line - 1)
 
     const wid = errorMarker.offsetWidth
 
@@ -168,6 +171,7 @@ function saveCodeToLocalStorage() {
 function loadCodeFromLocalStorage() {
     const code = localStorage.getItem('ludolfcCode')
     if (code) codeTextarea.value = code
+    else codeTextarea.value = snippet()
 }
 
 function onPageReload() {
@@ -177,3 +181,8 @@ function onPageReload() {
 onPageReload()
 
 addEventListener("resize", event => onPageReload())
+
+document.querySelectorAll('.localization-control').forEach(lc => lc.addEventListener('click', () => {
+    changeLocale(lc.getAttribute('lang'))
+    loadCodeFromLocalStorage()
+}))

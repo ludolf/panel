@@ -9,13 +9,13 @@ robot.raw.callback.move = async () => await display(map.mapped)
 
 async function display(...input) {
     if (!input || !input[0]) return
-    if (input[0].isMap || input[0].isRobot) displayMap()
-    else resultDiv.innerHTML = input.map(i => stringify(i)).join(' ')
+    if (input.some(i => i.isMap || i.isRobot)) displayMap(input.length === 1)
+    resultDiv.innerHTML = input.filter(i => !i.isMap && !i.isRobot).map(i => stringify(i)).join(' ')
     await sleep()
 }
 
-function displayMap() {
-    resetDisplay()
+function displayMap(reset = true) {
+    if (reset) resetDisplay()
     const m = map.raw
     const r = robot.raw
     const size = m.length
