@@ -1,6 +1,5 @@
 import { LudolfC, lang } from 'ludolfc'
 import { display, resetDisplay } from './display'
-import stringify from './stringify'
 import map from './map'
 import robot from './robot'
 import { changeLocale, snippet } from './localization'
@@ -8,7 +7,7 @@ import { changeLocale, snippet } from './localization'
 const displayLang = new lang.NativeFunction((...input) => display(...input))
 
 const imports = { 
-    Display: displayLang, Zobraz: displayLang, Darstellen: displayLang,
+    Display: displayLang, Zobraz: displayLang, Anzeigen: displayLang,
     Map: map.mapped, Mapa: map.mapped, Karte: map.mapped,
     Ludolf: robot.mapped,
 }
@@ -49,8 +48,7 @@ runButton.addEventListener('click', async () => {
     if (resultDiv.classList.contains('error')) resultDiv.classList.remove('error')
     try {
         const result = await ludolfC.execute(codeTextarea.value)
-        const output = stringify(result)
-        if (output) resultDiv.innerHTML = output
+        display(result)
     } catch (e) {
         mapTable.classList.add('interrupted')
         if (e.isLangInterruption) {

@@ -3,6 +3,7 @@
     --black: #111111;
     --lighter: #fce8c4;
     --darker: #dfd4c3;
+    --pitfall: #c4bbdeff;
 }
 
 body {
@@ -167,18 +168,36 @@ textarea, code, pre, .errorMarker, #result {
     justify-content: center;
     color: white;
 }
-#result {
-    font-size: 1.5rem;
-    color: blue;
+#resultBox {
+    height: 10rem;
+    width: 100%;
+    max-width: 27rem;
     margin: 1rem 0;
     text-align: center;
     position: absolute;
     z-index: 10;
 }
-#result.error {
-    color: orangered !important;
+#result {
+    color: blue;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: center;
+    text-anchor: middle;
+    text-shadow:
+    -0.25rem -0.25rem 0 #fff,
+     0   -0.25rem 0 #fff,
+     0.25rem -0.25rem 0 #fff,
+     0.25rem  0   0 #fff,
+     0.25rem  0.25rem 0 #fff,
+     0    0.25rem 0 #fff,
+    -0.25rem  0.25rem 0 #fff,
+    -0.25rem  0   0 #fff;
 }
-#display, #result {
+#result.error {
+    font-size: 1.2em;
+    color: red !important;
+}
+#display, #resultBox {
     border-radius: 1rem;
 }
 
@@ -197,17 +216,21 @@ textarea, code, pre, .errorMarker, #result {
     background-size: contain;
     background-position: center center;
 }
-#map .map-value-3 {
+#map .map-value-energy {
     /**background-color: greenyellow;*/
     background-image: url('mushroom.svg');
 }
-#map .map-value-1 {
+#map .map-value-robot, #map .map-value-robot-trapped {
     background-image: url('ludolf.svg');
 }
-#map .map-value-2 {
+#map .map-value-robot-trapped {
+    transform: rotate(90deg);
+    background-color: var(--pitfall);
+}
+#map .map-value-rocket {
     background-image: url('rocket.svg');
 }
-#map .map-value-4 {
+#map .map-value-pitfall {
     /*background-color: indigo;*/
     background-image: url('pitfall.svg');
 }
@@ -345,8 +368,11 @@ textarea, code, pre, .errorMarker, #result {
         border-bottom: 1px solid white;
     }    
     #result {
-        font-size: 1rem;
+        font-size: 1.2rem;
         padding: 2rem 1rem;
+    }   
+    #result.error {
+        font-size: 1rem;
     }
     #footer a.localization-control {
         font-size: 1rem;

@@ -46,8 +46,8 @@ Display(Map)</textarea>
               <button class="char" type="button">}</button>
               <button class="char" type="button">&lt;</button>
               <button class="char" type="button">&gt;</button>
-              <button class="char" type="button">(</button>
-              <button class="char" type="button">)</button>
+              <button class="char" type="button">&</button>
+              <button class="char" type="button">|</button>
               <button class="char" type="button">:</button>
               <button class="char" type="button">=</button>
             </div>
@@ -58,7 +58,7 @@ Display(Map)</textarea>
         </div>
         <div class="panel__right">
           <div id="display">
-            <div id="result"></div>
+            <div id="resultBox"><div id="result"></div></div>
             <table id="map"></table>
           </div>
         </div>
@@ -170,16 +170,18 @@ Display(Map)</textarea>
         <div>
           <div>Ludolf & Display</div>
           <code>
-            Display(Ludolf)<br>
-            <br>
             Ludolf.up()<br>
             Ludolf.down()<br>
             Ludolf.right()<br>
             Ludolf.left()<br>
             <br>
+            Ludolf.position.x<br>
+            Ludolf.position.y<br>
+            <br>
             Display(1)<br>
             Display("Hello!")<br>
-            Display("x =", 123)
+            Display("x =", 123)<br>
+            Display(Ludolf)<br>
           </code>
         </div>
       </div>
@@ -256,13 +258,13 @@ Display(Map)</textarea>
             plus := (x,y){ x + y }<br>
             fünf := plus(2,3)<br>
             <br>
-            Darstellen(1 + 2)<br>
+            Anzeigen(1 + 2)<br>
             <br>
-            darstellen_1_2 := (){<br>
-            &nbsp; Darstellen(1)<br>
-            &nbsp; Darstellen(2)<br>
+            anzeigen_1_2 := (){<br>
+            &nbsp; Anzeigen(1)<br>
+            &nbsp; Anzeigen(2)<br>
             }<br>
-            darstellen_1_2()
+            anzeigen_1_2()
           </code>
         </div>
         <div>
@@ -283,22 +285,24 @@ Display(Map)</textarea>
             &nbsp; }<br>
             }<br>
             robot.bewege(5,8)<br>
-            Darstellen(robot.position)
+            Anzeigen(robot.position)
           </code>
         </div>
         <div>
-          <div>Ludolf & Darstellen</div>
+          <div>Ludolf & Anzeigen</div>
           <code>
-            Darstellen(Ludolf)<br>
-            <br>
-            Ludolf.nachOben()<br>
-            Ludolf.nachUnten()<br>
+            Ludolf.hoch()<br>
+            Ludolf.runter()<br>
             Ludolf.rechts()<br>
             Ludolf.links()<br>
             <br>
-            Darstellen(1)<br>
-            Darstellen("Hello!")<br>
-            Darstellen("x =", 123)
+            Ludolf.position.x<br>
+            Ludolf.position.y<br>
+            <br>
+            Anzeigen(1)<br>
+            Anzeigen("Hello!")<br>
+            Anzeigen("x =", 123)<br>
+            Anzeigen(Ludolf)<br>
           </code>
         </div>
       </div>
@@ -395,29 +399,31 @@ Display(Map)</textarea>
             <br>
             robot := {<br>
             &nbsp; jméno: "Ludolf",<br>
-            &nbsp; pozice: souřadnice,<br>
+            &nbsp; poloha: souřadnice,<br>
             &nbsp; přesunout: (x,y){<br>
-            &nbsp; &nbsp; pozice.x := x<br>
-            &nbsp; &nbsp; pozice.y := y<br>
+            &nbsp; &nbsp; poloha.x := x<br>
+            &nbsp; &nbsp; poloha.y := y<br>
             &nbsp; }<br>
             }<br>
             robot.přesunout(5,8)<br>
-            Zobraz(robot.pozice)
+            Zobraz(robot.poloha)
           </code>
         </div>
         <div>
           <div>Ludolf & Zobraz</div>
           <code>
-            Zobraz(Ludolf)<br>
-            <br>
             Ludolf.nahoru()<br>
             Ludolf.dolů()<br>
-            Ludolf.vpravo()<br>
-            Ludolf.vlevo()<br>
+            Ludolf.doprava()<br>
+            Ludolf.doleva()<br>
+            <br>
+            Ludolf.poloha.x<br>
+            Ludolf.poloha.y<br>
             <br>
             Zobraz(1)<br>
             Zobraz("Ahoj!")<br>
-            Zobraz("x =", 123)
+            Zobraz("x =", 123)<br>
+            Zobraz(Ludolf)<br>
           </code>
         </div>
       </div>

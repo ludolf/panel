@@ -9,10 +9,10 @@ while i > 0 {
 Display(Map)`,
     de: `i := 3
 solange i > 0 {
-  Darstellen(i, "...")
+  Anzeigen(i, "...")
   i := i - 1
 }
-Darstellen(Map)`,
+Anzeigen(Map)`,
     cs: `i := 3
 dokud i > 0 {
   Zobraz(i, "...")

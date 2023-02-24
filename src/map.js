@@ -1,18 +1,18 @@
 import { lang } from 'ludolfc'
-import { SIZE, RADIUS } from './constants'
+import { SIZE, RADIUS, SAND, ROCKET, PITFALL, ENERGY } from './constants'
 
 const map = []
 
 // init array
 for (let i = 0; i < SIZE; i++) map[i] = []
 // pitfalls
-for (let i = 2; i < SIZE - 2; i++) for (let j = 2; j < SIZE - 2; j++) map[i][j] = random(j, i, 4, map[i][j])
-// points
-for (let i = 0; i < SIZE; i++) for (let j = 0; j < SIZE; j++) map[i][j] = random(j, i, 3, map[i][j])
+for (let i = 2; i < SIZE - 2; i++) for (let j = 2; j < SIZE - 2; j++) map[i][j] = random(j, i, PITFALL, map[i][j])
+// energy points
+for (let i = 0; i < SIZE; i++) for (let j = 0; j < SIZE; j++) map[i][j] = random(j, i, ENERGY, map[i][j])
 // rocket
-map[RADIUS][RADIUS] = 2
+map[RADIUS][RADIUS] = ROCKET
 // robot
-map[RADIUS + 1][RADIUS] = 0 // make a room for the robot
+map[RADIUS - 1][RADIUS] = SAND // make a room for the robot
 
 // copy current
 const mapCopy = []
@@ -33,12 +33,12 @@ function toLang(map) {
 
 function random(x, y, value, def) {
     let coeficient = 1
-    if (value === 3) {  // more probable on the sides
+    if (value === ENERGY) {  // more probable on the sides
         const distanceX = Math.abs(x - (SIZE-1) / 2) 
         const distanceY = Math.abs(y - (SIZE-1) / 2) 
         coeficient = Math.max(distanceX, distanceY) / 15
     } else
-    if (value === 4) {  
+    if (value === PITFALL) {  
         coeficient = 0.3   // unlikely
         if (x > RADIUS - 2 && x < RADIUS + 2
             || y > RADIUS - 2 && y < RADIUS + 2) return def // not around the rocket

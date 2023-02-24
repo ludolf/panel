@@ -1,3 +1,4 @@
+import { SAND, ROBOT, ROCKET, PITFALL, ENERGY } from './constants'
 import stringify from './stringify'
 import map from './map'
 import robot from './robot'
@@ -23,8 +24,10 @@ function displayMap(reset = true) {
     for (let i = size - 1; i >= 0; i--) {
         content += '<tr>'
         for (let j = 0; j < size; j++) {
-            const value = (j === r.position.x && i === r.position.y) ? 1 : m[i][j]
-            content += `<td class="map-cell map-${i}-${j} map-value-${value} `
+            const value = (j === r.positionRaw.x && i === r.positionRaw.y) ? ROBOT : m[i][j]
+            const flag = value === ROBOT && r.status.trapped ? '-trapped' : ''
+            if (value === ROBOT) console.log('STATUS', r.status)
+            content += `<td class="map-cell map-${i}-${j} map-value-${mapValue(value)}${flag} `
             if (i === 0 || j === 0 || i === size - 1 || j === size - 1) content += 'side '
             if (i === 0 && j === 0) content += 'corner bottom-left'
             else if (i === 0 && j === size - 1) content += 'corner bottom-right'
@@ -40,6 +43,14 @@ function displayMap(reset = true) {
 function resetDisplay() {
     resultDiv.innerHTML = ''
     mapTable.innerHTML = ''
+}
+
+function mapValue(id) {
+    return id === ROBOT ? 'robot' :
+           id === ROCKET ? 'rocket' :
+           id === PITFALL ? 'pitfall' :
+           id === ENERGY ? 'energy' :
+           'sand'
 }
 
 function sleep(ms = 500) {
