@@ -236,7 +236,6 @@ textarea, code, pre, .errorMarker, #result {
     transform: rotate(180deg);
     filter:  sepia(1);
     background-color: white;
-    border-top: 0.2rem solid white;
     border-left: 0.2rem solid white;
     border-right: 0;
     border-bottom: 0;
