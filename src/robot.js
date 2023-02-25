@@ -1,38 +1,47 @@
 import { lang } from 'ludolfc'
-import { SIZE, RADIUS, PITFALL } from './constants'
+import { SIZE, SAND, ENERGY, PITFALL, ROBOT_X, ROBOT_Y } from './constants'
 import map from './map'
 
-const position = { x: RADIUS, y: RADIUS - 1 }
+const ENERGY_DEFAULT = 10
+const ENERGY_CHARGE = 5
+const ENERGY_MOVE = 1
+
+const position = { x: ROBOT_X, y: ROBOT_Y }
 const positionLang = new lang.Object({
     x: new lang.Number(position.x),
     y: new lang.Number(position.y),
 })
 const callback = {
-    move: null,
+    move: null, // after moved
 }
 const status = {
-    trapped: false
+    trapped: false,
+    charging: false,
+    energy: ENERGY_DEFAULT,
 }
+const energyLang = new lang.Number(status.energy)
 
-function beforeMove() {    
+function beforeMove() {
+    status.charging = false
     if (status.trapped) return false
     return true
 }
 
 function afterMove() {
-    if (PITFALL === map.raw[position.y][position.x]) {
-        status.trapped = true
-    }
+    if (PITFALL === map.raw[position.x][position.y]) status.trapped = true
+    status.energy -= ENERGY_MOVE
+    energyLang.value = status.energy
 }
 
 const robot = {
     position: positionLang,
     positionRaw: position,
-    callback,
+    energy: energyLang,
     status,
+    callback,
     
     up: new lang.NativeFunction(async () => {
-        console.debug('Robot up')
+        console.debug('Robot up', JSON.stringify(position))
         if (!beforeMove()) return
         if (position.y >= SIZE -1) return
         position.y++
@@ -41,7 +50,7 @@ const robot = {
         if (callback.move) await callback.move()
     }),
     down: new lang.NativeFunction(async () => {
-        console.debug('Robot down')
+        console.debug('Robot down', JSON.stringify(position))
         if (!beforeMove()) return
         if (position.y <= 0) return
         position.y--
@@ -50,7 +59,7 @@ const robot = {
         if (callback.move) await callback.move()
     }),
     right: new lang.NativeFunction(async () => {
-        console.debug('Robot right')
+        console.debug('Robot right', JSON.stringify(position))
         if (!beforeMove()) return
         if (position.x >= SIZE -1) return
         position.x++
@@ -59,7 +68,7 @@ const robot = {
         if (callback.move) await callback.move()
     }),
     left: new lang.NativeFunction(async () => {
-        console.debug('Robot left')
+        console.debug('Robot left', JSON.stringify(position))
         if (!beforeMove()) return
         if (position.x <= 0) return
         position.x--
@@ -69,17 +78,29 @@ const robot = {
     }),
 
     avoid: new lang.NativeFunction(async () => {
-        console.debug('Robot avoid')
+        console.debug('Robot avoid', JSON.stringify(position))
         status.trapped = false
         if (callback.move) await callback.move()
     }),
 
+    charge: new lang.NativeFunction(async () => {
+        console.debug('Robot charge', JSON.stringify(position))
+        if (ENERGY === map.raw[position.x][position.y]) {
+            status.charging = true
+            status.energy += ENERGY_CHARGE
+            energyLang.value = status.energy
+            map.raw[position.x][position.y] = SAND
+            if (callback.move) await callback.move()
+        }
+    }),
+
     reset: () => {
-        position.x = RADIUS
-        position.y = RADIUS - 1
+        position.x = ROBOT_X
+        position.y = ROBOT_Y
         positionLang.value.x.value = position.x
         positionLang.value.y.value = position.y
         status.trapped = false
+        status.energy = ENERGY_DEFAULT
     }
 }
 
@@ -99,6 +120,9 @@ robot['links'] = robot.left
 robot['poloha'] = robot.position
 robot['vyhnout'] = robot.avoid
 robot['vermeiden'] = robot.avoid
+robot['dobít'] = robot.charge
+robot['aufladen'] = robot.charge
+robot['energie'] = robot.energy
 
 export default {
     raw: robot,

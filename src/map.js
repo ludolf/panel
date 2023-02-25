@@ -1,5 +1,5 @@
 import { lang } from 'ludolfc'
-import { SIZE, RADIUS, SAND, ROCKET, PITFALL, ENERGY } from './constants'
+import { SIZE, RADIUS, SAND, ROCKET, PITFALL, ENERGY, ROCKET_X, ROCKET_Y, ROBOT_X, ROBOT_Y } from './constants'
 
 const map = []
 
@@ -10,9 +10,9 @@ for (let i = 2; i < SIZE - 2; i++) for (let j = 2; j < SIZE - 2; j++) map[i][j] 
 // energy points
 for (let i = 0; i < SIZE; i++) for (let j = 0; j < SIZE; j++) map[i][j] = random(j, i, ENERGY, map[i][j])
 // rocket
-map[RADIUS][RADIUS] = ROCKET
+map[ROCKET_X][ROCKET_Y] = ROCKET
 // robot
-map[RADIUS - 1][RADIUS] = SAND // make a room for the robot
+map[ROBOT_X][ROBOT_Y] = SAND // make a room for the robot
 
 // copy current
 const mapCopy = []

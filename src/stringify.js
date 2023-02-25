@@ -5,5 +5,7 @@ export default function stringify(obj) {
            'BOOLEAN' === obj.type ? (obj.value ? '<b>✓</b>' : '<b>✗</b>') :
            'STRING' === obj.type ? obj.value :
            (obj.value !== null && obj.value !== undefined) ? stringify(obj.value) :
-           obj.isFunction ? '[function]' : JSON.stringify(obj)
+           obj.isFunction ? '[function]' :
+           typeof obj === 'string' ? obj :
+           JSON.stringify(obj)
 }

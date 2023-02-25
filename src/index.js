@@ -2,13 +2,15 @@ import { LudolfC, lang } from 'ludolfc'
 import { display, resetDisplay } from './display'
 import map from './map'
 import robot from './robot'
+import rocket from './rocket'
 import { changeLocale, snippet } from './localization'
 
 const displayLang = new lang.NativeFunction((...input) => display(...input))
 
-const imports = { 
+const imports = {
     Display: displayLang, Zobraz: displayLang, Anzeigen: displayLang,
     Map: map.mapped, Mapa: map.mapped, Karte: map.mapped,
+    Rocket: rocket.mapped, Raketa: rocket.mapped, Rakete: rocket.mapped,
     Ludolf: robot.mapped,
 }
 

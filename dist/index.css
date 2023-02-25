@@ -220,10 +220,14 @@ textarea, code, pre, .errorMarker, #result {
     /**background-color: greenyellow;*/
     background-image: url('mushroom.svg');
 }
-#map .map-value-robot, #map .map-value-robot-trapped {
+#map .map-value-robot {
     background-image: url('ludolf.svg');
 }
-#map .map-value-robot-trapped {
+#map .map-value-robot.charging {
+    /*filter: hue-rotate(90deg);*/
+    background-color: magenta;
+}
+#map .map-value-robot.trapped {
     transform: rotate(90deg);
     background-color: var(--pitfall);
 }
@@ -244,6 +248,10 @@ textarea, code, pre, .errorMarker, #result {
 }
 #map.interrupted {
     filter: blur(3px);
+}
+#map.universe {
+    background-color: navy; /* TODO */
+    background-image: url('universe.svg');
 }
 
 .tips {
