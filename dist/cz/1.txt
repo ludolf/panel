@@ -53,30 +53,3 @@ dokud x < Mapa.velikost {
   Ludolf.doprava()
   směr := !směr
 }
-
-Zobraz("K raketě")
-
-Rx :=  Raketa.poloha.x
-Ry :=  Raketa.poloha.y
-
-dokud Ludolf.poloha.x != Rx | Ludolf.poloha.y != Ry {
-  
-  překonat_propast()
-
-  pokud Ludolf.poloha.x > Rx {
-    Ludolf.doleva()
-  }
-  pokud Ludolf.poloha.x < Rx {
-    Ludolf.doprava()
-  }
-  pokud Ludolf.poloha.y > Ry {
-    Ludolf.dolů()
-  }
-  pokud Ludolf.poloha.y < Ry {
-    Ludolf.nahoru()
-  }
-}
-
-Zobraz("Energie:", Ludolf.energie)
-
-Raketa.start()

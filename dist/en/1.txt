@@ -53,30 +53,3 @@ while x < Map.size {
   Ludolf.right()
   direction := !direction
 }
-
-Display("To the rocket")
-
-Rx :=  Rocket.position.x
-Ry :=  Rocket.position.y
-
-while Ludolf.position.x != Rx | Ludolf.position.y != Ry {
-  
-  avoid_pitfall()
-
-  if Ludolf.position.x > Rx {
-    Ludolf.left()
-  }
-  if Ludolf.position.x < Rx {
-    Ludolf.right()
-  }
-  if Ludolf.position.y > Ry {
-    Ludolf.down()
-  }
-  if Ludolf.position.y < Ry {
-    Ludolf.up()
-  }
-}
-
-Display("Energy:", Ludolf.energy)
-
-Rocket.start()

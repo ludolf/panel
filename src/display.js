@@ -53,6 +53,7 @@ function displayMap(reset = true) {
             const value = (isRobot(x, y) && !isRocket(x, y)) ? ROBOT : m[x][y]
             const flag = value === ROBOT && r.status.trapped ? 'trapped' 
                        : value === ROBOT && r.status.charging ? 'charging' 
+                       : value === ROBOT && r.status.energy <= 0 ? 'dead' 
                        : ''
             content += `<td class="map-cell map-${x}-${y} map-value-${mapValue(value)} ${flag} `
             if (x === 0 || y === 0 || x === size - 1 || y === size - 1) content += 'side '

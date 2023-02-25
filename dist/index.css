@@ -224,12 +224,22 @@ textarea, code, pre, .errorMarker, #result {
     background-image: url('ludolf.svg');
 }
 #map .map-value-robot.charging {
-    /*filter: hue-rotate(90deg);*/
     background-color: magenta;
 }
 #map .map-value-robot.trapped {
     transform: rotate(90deg);
     background-color: var(--pitfall);
+    border-top: 0.2rem solid white;
+    border-bottom: 0;
+}
+#map .map-value-robot.dead {
+    transform: rotate(180deg);
+    filter:  sepia(1);
+    background-color: white;
+    border-top: 0.2rem solid white;
+    border-left: 0.2rem solid white;
+    border-right: 0;
+    border-bottom: 0;
 }
 #map .map-value-rocket {
     background-image: url('rocket.svg');

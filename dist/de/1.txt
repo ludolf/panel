@@ -53,30 +53,3 @@ solange x < Karte.größe {
   Ludolf.rechts()
   richtung := !richtung
 }
-
-Anzeigen("Zur Rakete")
-
-Rx :=  Rakete.position.x
-Ry :=  Rakete.position.y
-
-solange Ludolf.position.x != Rx | Ludolf.position.y != Ry {
-  
-  falle_vermeiden()
-
-  falls Ludolf.position.x > Rx {
-    Ludolf.links()
-  }
-  falls Ludolf.position.x < Rx {
-    Ludolf.rechts()
-  }
-  falls Ludolf.position.y > Ry {
-    Ludolf.runter()
-  }
-  falls Ludolf.position.y < Ry {
-    Ludolf.hoch()
-  }
-}
-
-Anzeigen("Energie:", Ludolf.energie)
-
-Rakete.start()
