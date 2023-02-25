@@ -1,0 +1,82 @@
+Hoch := Wahr
+Down := Unwahr
+
+Falle := 30
+Energie := 40
+
+falle_vermeiden := () {
+  feld := Karte[Ludolf.position.x, Ludolf.position.y]
+  falls feld = Falle {
+    Ludolf.vermeiden()
+  }
+}
+
+energie_aufladen := () {
+  feld := Karte[Ludolf.position.x, Ludolf.position.y]
+  falls feld = Energie {
+    Ludolf.aufladen()
+  }
+}
+
+Anzeigen("Von Anfang an")
+
+solange Ludolf.position.x != 0 | Ludolf.position.y != 0 {
+  falle_vermeiden()
+  Ludolf.runter()
+  Ludolf.links()  
+}
+
+Anzeigen("Zur Energie")
+
+richtung := Hoch
+x := 0
+y := 0
+
+solange x < Karte.größe {
+  solange y < Karte.größe {
+
+    falle_vermeiden()
+    energie_aufladen()
+
+    falls richtung = Hoch { 
+      Ludolf.hoch() 
+    }
+    sonst { 
+      Ludolf.runter() 
+    }
+
+    y := y + 1
+  }
+  
+  y := 0
+  x := x + 1
+  Ludolf.rechts()
+  richtung := !richtung
+}
+
+Anzeigen("Zur Rakete")
+
+Rx :=  Rakete.position.x
+Ry :=  Rakete.position.y
+
+solange Ludolf.position.x != Rx | Ludolf.position.y != Ry {
+  
+  falle_vermeiden()
+
+  falls Ludolf.position.x > Rx {
+    Ludolf.links()
+  }
+  falls Ludolf.position.x < Rx {
+    Ludolf.rechts()
+  }
+  falls Ludolf.position.y > Ry {
+    Ludolf.runter()
+  }
+  falls Ludolf.position.y < Ry {
+    Ludolf.hoch()
+  }
+}
+
+Anzeigen("Energie:", Ludolf.energie)
+
+Rakete.start()

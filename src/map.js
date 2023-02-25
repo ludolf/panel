@@ -46,7 +46,7 @@ function random(x, y, value, def) {
     return !!Math.round(Math.random() * 0.3 + coeficient) ? value : def
 }
 
-const reset = () => map.forEach((a,i) => a.map((v,j) => map[i][j] = v))
+const reset = () => mapCopy.forEach((a,i) => a.map((v,j) => map[i][j] = v))
 
 export default {
     raw: map,

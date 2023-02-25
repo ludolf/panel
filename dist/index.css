@@ -254,6 +254,17 @@ textarea, code, pre, .errorMarker, #result {
     background-image: url('universe.svg');
 }
 
+#score {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    color: magenta;
+}
+#score::before, #score::after {
+    content: '⚡';
+    padding: 0 0.5rem;
+}
+
 .tips {
     margin: 0 0 2rem 0;
     font-size: 1.5rem;
@@ -374,7 +385,10 @@ textarea, code, pre, .errorMarker, #result {
     #map>tr:not(:last-child)>td,
     #map>tbody:not(:last-child) {
         border-bottom: 1px solid white;
-    }    
+    }
+    #score {
+        font-size: 1.5rem;
+    }
     #result {
         font-size: 1.2rem;
         padding: 2rem 1rem;

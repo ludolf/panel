@@ -2,9 +2,10 @@ import { lang } from 'ludolfc'
 import { SIZE, SAND, ENERGY, PITFALL, ROBOT_X, ROBOT_Y } from './constants'
 import map from './map'
 
-const ENERGY_DEFAULT = 10
-const ENERGY_CHARGE = 5
+const ENERGY_DEFAULT = 15
+const ENERGY_CHARGE = 3
 const ENERGY_MOVE = 1
+const ENERGY_AVOID = 2
 
 const position = { x: ROBOT_X, y: ROBOT_Y }
 const positionLang = new lang.Object({
@@ -21,16 +22,21 @@ const status = {
 }
 const energyLang = new lang.Number(status.energy)
 
+function updateEnergy(delta) {
+    status.energy += delta
+    energyLang.value = status.energy
+}
+
 function beforeMove() {
     status.charging = false
     if (status.trapped) return false
+    if (status.energy < ENERGY_MOVE) return false
     return true
 }
 
 function afterMove() {
     if (PITFALL === map.raw[position.x][position.y]) status.trapped = true
-    status.energy -= ENERGY_MOVE
-    energyLang.value = status.energy
+    updateEnergy(-ENERGY_MOVE)
 }
 
 const robot = {
@@ -79,7 +85,10 @@ const robot = {
 
     avoid: new lang.NativeFunction(async () => {
         console.debug('Robot avoid', JSON.stringify(position))
+        if (status.energy < ENERGY_AVOID) return
         status.trapped = false
+        map.raw[position.x][position.y] = SAND
+        updateEnergy(-ENERGY_AVOID)
         if (callback.move) await callback.move()
     }),
 
@@ -87,9 +96,8 @@ const robot = {
         console.debug('Robot charge', JSON.stringify(position))
         if (ENERGY === map.raw[position.x][position.y]) {
             status.charging = true
-            status.energy += ENERGY_CHARGE
-            energyLang.value = status.energy
             map.raw[position.x][position.y] = SAND
+            updateEnergy(ENERGY_CHARGE)
             if (callback.move) await callback.move()
         }
     }),
@@ -101,6 +109,7 @@ const robot = {
         positionLang.value.y.value = position.y
         status.trapped = false
         status.energy = ENERGY_DEFAULT
+        energyLang.value = status.energy
     }
 }
 

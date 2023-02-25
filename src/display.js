@@ -6,14 +6,15 @@ import rocket from './rocket'
 
 const mapTable = document.getElementById('map')
 const resultDiv = document.getElementById('result')
+const scoreDiv = document.getElementById('score')
 
 robot.raw.callback.move = async () => { displayMap(); await sleep() }
 rocket.raw.callback.start = async () => {  // TODO
     const delay = 1000
-    // await displayWithDelay(delay, "...5...")
-    // await displayWithDelay(delay, "...4...")
-    // await displayWithDelay(delay, "...3...")
-    // await displayWithDelay(delay, "...2...")
+    await displayWithDelay(delay, "...5...")
+    await displayWithDelay(delay, "...4...")
+    await displayWithDelay(delay, "...3...")
+    await displayWithDelay(delay, "...2...")
     await displayWithDelay(delay, "...1...")
     await displayWithDelay(delay, "🥳🚀🏠")
     resetDisplay()
@@ -24,7 +25,7 @@ async function displayWithDelay(delay, ...input) {
     if (!input || !input[0]) return
     if (input.some(isSpecialObject)) displayMap(input.length === 1)
     const text = input.filter(i => !isSpecialObject(i)).map(i => stringify(i)).join(' ')
-    console.log('display', text)
+    console.log('Display:', text)
     resultDiv.innerHTML = text
     await sleep(delay)
 
@@ -34,7 +35,7 @@ async function displayWithDelay(delay, ...input) {
 }
 
 async function display(...input) {
-    displayWithDelay(500, ...input)
+    await displayWithDelay(500, ...input)
 }
 
 function displayMap(reset = true) {
@@ -42,7 +43,7 @@ function displayMap(reset = true) {
     const m = map.raw
     const r = robot.raw
 
-    if (r.status.charging) display(r.status.energy)
+    scoreDiv.innerHTML = r.status.energy
 
     const size = m.length
     let content = ''
