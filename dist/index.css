@@ -269,6 +269,12 @@ textarea, code, pre, .errorMarker, #result {
     font-weight: bold;
     color: magenta;
 }
+#score.full {
+    color: limegreen;
+}
+#score.empty {
+    color: red;
+}
 #score::before, #score::after {
     content: '⚡';
     padding: 0 0.5rem;

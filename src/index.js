@@ -43,6 +43,8 @@ runButton.addEventListener('click', async () => {
     runButton.classList.add('stop')
     mapTable.classList.remove('interrupted')
 
+    displayDiv.focus()
+
     // reset scene to initial state
     map.reset()
     robot.reset()

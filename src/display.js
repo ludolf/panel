@@ -44,6 +44,10 @@ function displayMap(reset = true) {
     const r = robot.raw
 
     scoreDiv.innerHTML = r.status.energy
+    if (r.status.energy >= rocket.MIN_ENERGY) scoreDiv.classList.add('full')
+    else scoreDiv.classList.remove('full')
+    if (r.status.energy <= 0) scoreDiv.classList.add('empty')
+    else scoreDiv.classList.remove('empty')
 
     const size = m.length
     let content = ''

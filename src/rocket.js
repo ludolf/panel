@@ -40,4 +40,5 @@ rocket['poloha'] = rocket.position
 export default {
     raw: rocket,
     mapped,
+    MIN_ENERGY,
 }
