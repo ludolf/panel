@@ -270,7 +270,7 @@ textarea, code, pre, .errorMarker, #result {
     color: magenta;
 }
 #score.full {
-    color: limegreen;
+    color: #00c500;
 }
 #score.empty {
     color: red;

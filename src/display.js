@@ -94,7 +94,7 @@ function mapValue(id) {
            'sand'
 }
 
-function sleep(ms = 500) {
+function sleep(ms = 250) {
     return new Promise((resolve) => setTimeout(resolve, ms));
 }
 

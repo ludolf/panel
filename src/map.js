@@ -1,14 +1,42 @@
 import { lang } from 'ludolfc'
-import { SIZE, RADIUS, SAND, ROCKET, PITFALL, ENERGY, ROCKET_X, ROCKET_Y, ROBOT_X, ROBOT_Y } from './constants'
+import { SIZE, SAND, ROCKET, PITFALL, ENERGY, ROCKET_X, ROCKET_Y, ROBOT_X, ROBOT_Y } from './constants'
+
+const PITFALL_COUNT = 10
+const ENERGY_COUNT = 20
 
 const map = []
 
 // init array
-for (let i = 0; i < SIZE; i++) map[i] = []
+for (let i = 0; i < SIZE; i++) {
+    map[i] = []
+    for (let j = 0; j < SIZE; j++) {
+        map[i][j] = SAND
+    }
+}
+
 // pitfalls
-for (let i = 2; i < SIZE - 2; i++) for (let j = 2; j < SIZE - 2; j++) map[i][j] = random(j, i, PITFALL, map[i][j])
+let i = 0
+while (i < PITFALL_COUNT) {
+    const x = randomInt(2, SIZE - 2)
+    const y = randomInt(2, SIZE - 2)
+    if (map[x][y] === SAND) {
+        map[x][y] = PITFALL 
+        i++        
+    }   
+}
+
 // energy points
-for (let i = 0; i < SIZE; i++) for (let j = 0; j < SIZE; j++) map[i][j] = random(j, i, ENERGY, map[i][j])
+let j = 0
+while (j < ENERGY_COUNT) {
+    const a = Math.random() > 0.5 ? randomInt(0, 2) : randomInt(SIZE - 2, SIZE)
+    const b = randomInt(0, SIZE)
+    const [x, y] = Math.random() > 0.5 ? [a, b] : [b, a]
+    if (map[x][y] === SAND) {
+        map[x][y] = ENERGY 
+        j++
+    }
+}
+
 // rocket
 map[ROCKET_X][ROCKET_Y] = ROCKET
 // robot
@@ -32,18 +60,23 @@ function toLang(map) {
 }
 
 function random(x, y, value, def) {
-    let coeficient = 1
-    if (value === ENERGY) {  // more probable on the sides
-        const distanceX = Math.abs(x - (SIZE-1) / 2) 
-        const distanceY = Math.abs(y - (SIZE-1) / 2) 
-        coeficient = Math.max(distanceX, distanceY) / 15
+    if (value === ENERGY) {  // on the sides
+        if (x > SIZE - 2 - 1 || x < 2 || y > SIZE - 2 - 1 || y < 2) {
+            return !!Math.round(Math.random() - 0.3) ? value : def
+        }
     } else
     if (value === PITFALL) {  
-        coeficient = 0.3   // unlikely
-        if (x > RADIUS - 2 && x < RADIUS + 2
-            || y > RADIUS - 2 && y < RADIUS + 2) return def // not around the rocket
+        if (!(x > SIZE - 2 - 1 || x < 2 || y > SIZE - 2 - 1 || y < 2)) {
+            return !!Math.round(Math.random() - 0.4) ? value : def
+        }
     }
-    return !!Math.round(Math.random() * 0.3 + coeficient) ? value : def
+    return def    
+}
+
+function randomInt(min, max) {
+    min = Math.ceil(min)
+    max = Math.floor(max)
+    return Math.floor(Math.random() * (max - min)) + min
 }
 
 const reset = () => mapCopy.forEach((a,i) => a.map((v,j) => map[i][j] = v))

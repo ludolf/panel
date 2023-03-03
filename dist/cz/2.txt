@@ -1,0 +1,95 @@
+Propast := 30
+Energie := 40
+
+překonat_propast := () {
+  políčko := Mapa[Ludolf.poloha.x, Ludolf.poloha.y]
+  pokud políčko = Propast {
+    Ludolf.vyhnout()
+  }
+}
+
+dobít_energii := () {
+  políčko := Mapa[Ludolf.poloha.x, Ludolf.poloha.y]
+  pokud políčko = Energie {
+    Ludolf.dobít()
+  }
+}
+
+posunout_na := (x, y) {
+  dokud Ludolf.poloha.x != x | Ludolf.poloha.y != y {
+
+    překonat_propast()
+
+    pokud Ludolf.poloha.x > x {
+      Ludolf.doleva()
+    }
+    pokud Ludolf.poloha.x < x {
+      Ludolf.doprava()
+    }
+    pokud Ludolf.poloha.y > y {
+      Ludolf.dolů()
+    }
+    pokud Ludolf.poloha.y < y {
+      Ludolf.nahoru()
+    }
+  }
+}
+
+Zobraz("Na začátek")
+
+posunout_na(0, 0)
+
+Zobraz("Za energií")
+
+dobít_energii()
+
+Nahoru := 0
+Doprava := Nahoru + 1
+Dolů := Doprava + 1
+Doleva := Dolů + 1
+
+směr := Nahoru
+úroveň := 0
+délka := Mapa.velikost
+
+posunout := () {
+  pokud směr = Nahoru {
+    Ludolf.nahoru()
+  }
+  pokud směr = Doprava {
+    Ludolf.doprava()
+  }
+  pokud směr = Dolů {
+    Ludolf.dolů()
+  }
+  pokud směr = Doleva {
+    Ludolf.doleva()
+  }
+  dobít_energii()
+}
+
+dokud úroveň < 2 {
+
+  pokud směr = Doleva {
+    posunout()
+    úroveň := úroveň + 1
+  }
+  pokud směr = Nahoru {
+    posunout()
+  }
+  
+  i := 1
+  dokud i < Mapa.velikost - úroveň * 2 {    
+    i := i + 1
+
+    posunout()
+  }
+
+  směr := (směr + 1) % 4
+}
+
+Zobraz("K raketě")
+
+posunout_na(Raketa.poloha.x, Raketa.poloha.y)
+
+Raketa.start()

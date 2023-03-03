@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/ludolf/panel#readme",
   "dependencies": {
-    "ludolfc": "^0.0.0-alpha3"
+    "ludolfc": "^0.0.0-alpha5"
   },
   "devDependencies": {
     "webpack": "^5.75.0",

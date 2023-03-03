@@ -3,7 +3,7 @@ import { display, resetDisplay } from './display'
 import map from './map'
 import robot from './robot'
 import rocket from './rocket'
-import { changeLocale, snippet } from './localization'
+import { changeLocale, snippet, errorMsg } from './localization'
 
 const displayLang = new lang.NativeFunction((...input) => display(...input))
 
@@ -64,11 +64,14 @@ runButton.addEventListener('click', async () => {
         if (e.isLangError) {
             const line = e.line || 0
             const col = e.col || 0            
-            resultDiv.innerHTML = (e.isParseError ? 'PARSE ' : '') + 'ERROR'
-                + (line && col ? ' (ln ' + line + ', col ' + col + ')' : '') + ':<br>' + e.message
+            const type = (e.isParseError ? 'PARSE ' : '') + 'ERROR'
+            const pos = (line && col ? '(ln ' + line + ', col ' + col + ')' : '')
+            resultDiv.innerHTML = type + ' ' + pos + ':<br>' + errorMsg(e.id) + ' ' + e.details
+            console.error(type, pos, e.message)
             markError(line, e.col)
         } else {
             resultDiv.innerHTML = 'ERROR ' + e
+            console.error(e)
         }
     } finally {
         runButton.classList.add('run')

@@ -2,7 +2,7 @@ import { lang } from 'ludolfc'
 import { ROCKET_X, ROCKET_Y } from './constants'
 import robot from './robot'
 
-const MIN_ENERGY = 20
+const MIN_ENERGY = 100
 
 const r = robot.raw
 
@@ -23,8 +23,8 @@ const rocket = {
     callback,
 
     start: new lang.NativeFunction(async () => {
-        console.debug('Rocket start', r.status.energy)
-        if (r.position.x !== position.x || r.position.y !== position.y) return await callback.position()
+        console.debug('Rocket start', r.status.energy, position)
+        if (r.positionRaw.x !== position.x || r.positionRaw.y !== position.y) return await callback.position()
         if (r.status.energy < MIN_ENERGY) return await callback.energy()
         await callback.start()
     }),

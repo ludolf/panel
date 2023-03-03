@@ -2,8 +2,8 @@ import { lang } from 'ludolfc'
 import { SIZE, SAND, ENERGY, PITFALL, ROBOT_X, ROBOT_Y } from './constants'
 import map from './map'
 
-const ENERGY_DEFAULT = 15
-const ENERGY_CHARGE = 3
+const ENERGY_DEFAULT = 30
+const ENERGY_CHARGE = 10
 const ENERGY_MOVE = 1
 const ENERGY_AVOID = 2
 
