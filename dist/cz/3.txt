@@ -87,3 +87,9 @@ dokud úroveň < 2 {
 
   směr := (směr + 1) % 4
 }
+
+Zobraz("K raketě")
+
+posunout_na(Raketa.poloha.x, Raketa.poloha.y)
+
+Raketa.start()

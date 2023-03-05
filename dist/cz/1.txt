@@ -18,13 +18,29 @@ dobít_energii := () {
   }
 }
 
+posunout_na := (x, y) {
+  dokud Ludolf.poloha.x != x | Ludolf.poloha.y != y {
+
+    překonat_propast()
+
+    pokud Ludolf.poloha.x > x {
+      Ludolf.doleva()
+    }
+    pokud Ludolf.poloha.x < x {
+      Ludolf.doprava()
+    }
+    pokud Ludolf.poloha.y > y {
+      Ludolf.dolů()
+    }
+    pokud Ludolf.poloha.y < y {
+      Ludolf.nahoru()
+    }
+  }
+}
+
 Zobraz("Na začátek")
 
-dokud Ludolf.poloha.x != 0 | Ludolf.poloha.y != 0 {
-  překonat_propast()
-  Ludolf.dolů()
-  Ludolf.doleva()  
-}
+posunout_na(0, 0)
 
 Zobraz("Za energií")
 

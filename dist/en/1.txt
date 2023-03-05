@@ -18,13 +18,29 @@ charge_energy := () {
   }
 }
 
+move_to := (x, y) {
+  while Ludolf.position.x != x | Ludolf.position.y != y {
+
+    avoid_pitfall()
+
+    if Ludolf.position.x > x {
+      Ludolf.left()
+    }
+    if Ludolf.position.x < x {
+      Ludolf.right()
+    }
+    if Ludolf.position.y > y {
+      Ludolf.down()
+    }
+    if Ludolf.position.y < y {
+      Ludolf.up()
+    }
+  }
+}
+
 Display("From beginning")
 
-while Ludolf.position.x != 0 | Ludolf.position.y != 0 {
-  avoid_pitfall()
-  Ludolf.down()
-  Ludolf.left()  
-}
+move_to(0, 0)
 
 Display("To energy")
 

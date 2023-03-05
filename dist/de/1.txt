@@ -1,5 +1,5 @@
 Hoch := Wahr
-Down := Unwahr
+Runter := Unwahr
 
 Falle := 30
 Energie := 40
@@ -18,13 +18,29 @@ energie_aufladen := () {
   }
 }
 
+bewegen_auf := (x, y) {
+  solange Ludolf.position.x != x | Ludolf.position.y != y {
+
+    falle_vermeiden()
+
+    falls Ludolf.position.x > x {
+      Ludolf.links()
+    }
+    falls Ludolf.position.x < x {
+      Ludolf.rechts()
+    }
+    falls Ludolf.position.y > y {
+      Ludolf.runter()
+    }
+    falls Ludolf.position.y < y {
+      Ludolf.hoch()
+    }
+  }
+}
+
 Anzeigen("Von Anfang an")
 
-solange Ludolf.position.x != 0 | Ludolf.position.y != 0 {
-  falle_vermeiden()
-  Ludolf.runter()
-  Ludolf.links()  
-}
+bewegen_auf(0, 0)
 
 Anzeigen("Zur Energie")
 

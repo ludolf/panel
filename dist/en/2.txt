@@ -1,0 +1,89 @@
+Pitfall := 30
+Energy := 40
+
+avoid_pitfall := () {
+  field := Map[Ludolf.position.x, Ludolf.position.y]
+  if field = Pitfall {
+    Ludolf.avoid()
+  }
+}
+
+charge_energy := () {
+  field := Map[Ludolf.position.x, Ludolf.position.y]
+  if field = Energy {
+    Ludolf.charge()
+  }
+}
+
+move_to := (x, y) {
+  while Ludolf.position.x != x | Ludolf.position.y != y {
+
+    avoid_pitfall()
+
+    if Ludolf.position.x > x {
+      Ludolf.left()
+    }
+    if Ludolf.position.x < x {
+      Ludolf.right()
+    }
+    if Ludolf.position.y > y {
+      Ludolf.down()
+    }
+    if Ludolf.position.y < y {
+      Ludolf.up()
+    }
+  }
+}
+
+Display("From beginning")
+
+move_to(0, 0)
+
+Display("To energy")
+
+charge_energy()
+
+Up := 0
+Right := Up + 1
+Down := Right + 1
+Left := Down + 1
+
+direction := Up
+level := 0
+length := Map.size
+
+move := () {
+  if direction = Up {
+    Ludolf.up()
+  }
+  if direction = Right {
+    Ludolf.right()
+  }
+  if direction = Down {
+    Ludolf.down()
+  }
+  if direction = Left {
+    Ludolf.left()
+  }
+  charge_energy()
+}
+
+while level < 2 {
+
+  if direction = Left {
+    level := level + 1
+    move()
+  }
+  if direction = Up {
+    move()
+  }
+  
+  i := 1
+  while i < Map.size - level * 2 {    
+    i := i + 1
+
+    move()
+  }
+
+  direction := (direction + 1) % 4
+}

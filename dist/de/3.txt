@@ -1,0 +1,95 @@
+Falle := 30
+Energie := 40
+
+falle_vermeiden := () {
+  feld := Karte[Ludolf.position.x, Ludolf.position.y]
+  falls feld = Falle {
+    Ludolf.vermeiden()
+  }
+}
+
+energie_aufladen := () {
+  feld := Karte[Ludolf.position.x, Ludolf.position.y]
+  falls feld = Energie {
+    Ludolf.aufladen()
+  }
+}
+
+bewegen_auf := (x, y) {
+  solange Ludolf.position.x != x | Ludolf.position.y != y {
+
+    falle_vermeiden()
+
+    falls Ludolf.position.x > x {
+      Ludolf.links()
+    }
+    falls Ludolf.position.x < x {
+      Ludolf.rechts()
+    }
+    falls Ludolf.position.y > y {
+      Ludolf.runter()
+    }
+    falls Ludolf.position.y < y {
+      Ludolf.hoch()
+    }
+  }
+}
+
+Anzeigen("Von Anfang an")
+
+bewegen_auf(0, 0)
+
+Anzeigen("Zur Energie")
+
+energie_aufladen()
+
+Hoch := 0
+Rechts := Hoch + 1
+Runter := Rechts + 1
+Links := Runter + 1
+
+richtung := Hoch
+ebene := 0
+länge := Karte.größe
+
+bewegen := () {
+  falls richtung = Hoch {
+    Ludolf.hoch()
+  }
+  falls richtung = Rechts {
+    Ludolf.rechts()
+  }
+  falls richtung = Runter {
+    Ludolf.runter()
+  }
+  falls richtung = Links {
+    Ludolf.links()
+  }
+  energie_aufladen()
+}
+
+solange ebene < 2 {
+
+  falls richtung = Links {
+    ebene := ebene + 1
+    bewegen()
+  }
+  falls richtung = Hoch {
+    bewegen()
+  }
+  
+  i := 1
+  solange i < Karte.größe - ebene * 2 {    
+    i := i + 1
+
+    bewegen()
+  }
+
+  richtung := (richtung + 1) % 4
+}
+
+Anzeigen("Zur Rakete")
+
+bewegen_auf(Rakete.position.x, Rakete.position.y)
+
+Rakete.start()
