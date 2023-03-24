@@ -26,13 +26,14 @@ posunout_na := (x, y) {
     pokud Ludolf.poloha.x > x {
       Ludolf.doleva()
     }
-    pokud Ludolf.poloha.x < x {
+    jinak pokud Ludolf.poloha.x < x {
       Ludolf.doprava()
     }
+    
     pokud Ludolf.poloha.y > y {
       Ludolf.dolů()
     }
-    pokud Ludolf.poloha.y < y {
+    jinak pokud Ludolf.poloha.y < y {
       Ludolf.nahoru()
     }
   }

@@ -23,13 +23,14 @@ posunout_na := (x, y) {
     pokud Ludolf.poloha.x > x {
       Ludolf.doleva()
     }
-    pokud Ludolf.poloha.x < x {
+    jinak pokud Ludolf.poloha.x < x {
       Ludolf.doprava()
     }
+    
     pokud Ludolf.poloha.y > y {
       Ludolf.dolů()
     }
-    pokud Ludolf.poloha.y < y {
+    jinak pokud Ludolf.poloha.y < y {
       Ludolf.nahoru()
     }
   }
@@ -56,13 +57,13 @@ posunout := () {
   pokud směr = Nahoru {
     Ludolf.nahoru()
   }
-  pokud směr = Doprava {
+  jinak pokud směr = Doprava {
     Ludolf.doprava()
   }
-  pokud směr = Dolů {
+  jinak pokud směr = Dolů {
     Ludolf.dolů()
   }
-  pokud směr = Doleva {
+  jinak pokud směr = Doleva {
     Ludolf.doleva()
   }
   dobít_energii()

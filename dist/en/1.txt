@@ -26,13 +26,14 @@ move_to := (x, y) {
     if Ludolf.position.x > x {
       Ludolf.left()
     }
-    if Ludolf.position.x < x {
+    else if Ludolf.position.x < x {
       Ludolf.right()
     }
+    
     if Ludolf.position.y > y {
       Ludolf.down()
     }
-    if Ludolf.position.y < y {
+    else if Ludolf.position.y < y {
       Ludolf.up()
     }
   }

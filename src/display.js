@@ -23,6 +23,7 @@ rocket.raw.callback.start = async () => {  // TODO
 
 async function displayWithDelay(delay, ...input) {
     if (!input || !input[0]) return
+    if (input[0].type === 'VOID') return
     if (input.some(isSpecialObject)) displayMap(input.length === 1)
     const text = input.filter(i => !isSpecialObject(i)).map(i => stringify(i)).join(' ')
     console.log('Display:', text)

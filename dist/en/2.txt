@@ -23,13 +23,14 @@ move_to := (x, y) {
     if Ludolf.position.x > x {
       Ludolf.left()
     }
-    if Ludolf.position.x < x {
+    else if Ludolf.position.x < x {
       Ludolf.right()
     }
+    
     if Ludolf.position.y > y {
       Ludolf.down()
     }
-    if Ludolf.position.y < y {
+    else if Ludolf.position.y < y {
       Ludolf.up()
     }
   }
@@ -56,13 +57,13 @@ move := () {
   if direction = Up {
     Ludolf.up()
   }
-  if direction = Right {
+  else if direction = Right {
     Ludolf.right()
   }
-  if direction = Down {
+  else if direction = Down {
     Ludolf.down()
   }
-  if direction = Left {
+  else if direction = Left {
     Ludolf.left()
   }
   charge_energy()

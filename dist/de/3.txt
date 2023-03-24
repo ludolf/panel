@@ -23,13 +23,14 @@ bewegen_auf := (x, y) {
     falls Ludolf.position.x > x {
       Ludolf.links()
     }
-    falls Ludolf.position.x < x {
+    sonst falls Ludolf.position.x < x {
       Ludolf.rechts()
     }
+    
     falls Ludolf.position.y > y {
       Ludolf.runter()
     }
-    falls Ludolf.position.y < y {
+    sonst falls Ludolf.position.y < y {
       Ludolf.hoch()
     }
   }
@@ -56,13 +57,13 @@ bewegen := () {
   falls richtung = Hoch {
     Ludolf.hoch()
   }
-  falls richtung = Rechts {
+  sonst falls richtung = Rechts {
     Ludolf.rechts()
   }
-  falls richtung = Runter {
+  sonst falls richtung = Runter {
     Ludolf.runter()
   }
-  falls richtung = Links {
+  sonst falls richtung = Links {
     Ludolf.links()
   }
   energie_aufladen()

@@ -26,13 +26,14 @@ bewegen_auf := (x, y) {
     falls Ludolf.position.x > x {
       Ludolf.links()
     }
-    falls Ludolf.position.x < x {
+    sonst falls Ludolf.position.x < x {
       Ludolf.rechts()
     }
+    
     falls Ludolf.position.y > y {
       Ludolf.runter()
     }
-    falls Ludolf.position.y < y {
+    sonst falls Ludolf.position.y < y {
       Ludolf.hoch()
     }
   }
