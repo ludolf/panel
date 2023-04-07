@@ -1,3 +1,6 @@
+Nahoru := Pravda
+Dolů := Nepravda
+
 Propast := 30
 Energie := 40
 
@@ -39,52 +42,54 @@ posunout_na := (x, y) {
 Zobraz("Na začátek")
 
 posunout_na(0, 0)
+dobít_energii()
 
 Zobraz("Za energií")
 
-dobít_energii()
-
-Nahoru := 0
-Doprava := Nahoru + 1
-Dolů := Doprava + 1
-Doleva := Dolů + 1
-
-směr := Nahoru
 úroveň := 0
-délka := Mapa.velikost
 
-posunout := () {
-  pokud směr = Nahoru {
-    Ludolf.nahoru()
-  }
-  jinak pokud směr = Doprava {
-    Ludolf.doprava()
-  }
-  jinak pokud směr = Dolů {
-    Ludolf.dolů()
-  }
-  jinak pokud směr = Doleva {
-    Ludolf.doleva()
-  }
-  dobít_energii()
-}
+dole := 0
+vlevo := 0
+nahoře := Mapa.velikost - 1
+vpravo := Mapa.velikost - 1
 
 dokud úroveň < 2 {
+  úroveň := úroveň + 1
 
-  pokud směr = Doleva {
-    úroveň := úroveň + 1
-    posunout()
+  // nahoru
+  y := dole
+  dokud y <= nahoře {
+    překonat_propast()
+    Ludolf.nahoru()
+    dobít_energii()
+    y := y + 1
   }
-  pokud směr = Nahoru {
-    posunout()
-  }
-  
-  i := 1
-  dokud i < Mapa.velikost - úroveň * 2 {    
-    i := i + 1
+  vlevo := vlevo + 1
 
-    posunout()
+  // doprava
+  x := vlevo
+  dokud x <= vpravo {
+    Ludolf.doprava()
+    dobít_energii()
+    x := x + 1
   }
+  nahoře := nahoře - 1
 
-  směr := (směr + 1) % 4
+  // dolů
+  y := nahoře
+  dokud y >= dole {
+    Ludolf.dolů()
+    dobít_energii()
+    y := y - 1
+  }
+  vpravo := vpravo - 1
+
+  // doleva
+  x := vpravo
+  dokud x >= vlevo {
+    Ludolf.doleva()
+    dobít_energii()
+    x := x - 1
+  }
+  dole := dole + 1
 }

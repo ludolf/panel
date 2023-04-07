@@ -39,54 +39,55 @@ bewegen_auf := (x, y) {
 Anzeigen("Von Anfang an")
 
 bewegen_auf(0, 0)
+energie_aufladen()
 
 Anzeigen("Zur Energie")
 
-energie_aufladen()
-
-Hoch := 0
-Rechts := Hoch + 1
-Runter := Rechts + 1
-Links := Runter + 1
-
-richtung := Hoch
 ebene := 0
-länge := Karte.größe
 
-bewegen := () {
-  falls richtung = Hoch {
-    Ludolf.hoch()
-  }
-  sonst falls richtung = Rechts {
-    Ludolf.rechts()
-  }
-  sonst falls richtung = Runter {
-    Ludolf.runter()
-  }
-  sonst falls richtung = Links {
-    Ludolf.links()
-  }
-  energie_aufladen()
-}
+unten := 0
+links := 0
+oben := Karte.größe - 1
+rechts := Karte.größe - 1
 
 solange ebene < 2 {
+  ebene := ebene + 1
 
-  falls richtung = Links {
-    ebene := ebene + 1
-    bewegen()
+  // nach oben
+  y := unten
+  solange y <= oben {
+    Ludolf.hoch()
+    energie_aufladen()
+    y := y + 1
   }
-  falls richtung = Hoch {
-    bewegen()
-  }
-  
-  i := 1
-  solange i < Karte.größe - ebene * 2 {    
-    i := i + 1
+  links := links + 1
 
-    bewegen()
+  // nach rechts
+  x := links
+  solange x <= rechts {
+    Ludolf.rechts()
+    energie_aufladen()
+    x := x + 1
   }
+  oben := oben - 1
 
-  richtung := (richtung + 1) % 4
+  // nach unten
+  y := oben
+  solange y >= unten {
+    Ludolf.runter()
+    energie_aufladen()
+    y := y - 1
+  }
+  rechts := rechts - 1
+
+  // nach links
+  x := rechts
+  solange x >= links {
+    Ludolf.links()
+    energie_aufladen()
+    x := x - 1
+  }
+  unten := unten + 1
 }
 
 Anzeigen("Zur Rakete")
