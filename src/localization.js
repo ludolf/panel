@@ -5,20 +5,20 @@ let locale = (localStorage.getItem('localization') || navigator.language || 'en'
 const Snippets = {
   en: `i := 3
 while i > 0 {
-Display(i, "...")
-i := i - 1
+  Display(i, "...")
+  i := i - 1
 }
 Display(Map)`,
   de: `i := 3
 solange i > 0 {
-Anzeigen(i, "...")
-i := i - 1
+  Anzeigen(i, "...")
+  i := i - 1
 }
 Anzeigen(Map)`,
   cs: `i := 3
 dokud i > 0 {
-Zobraz(i, "...")
-i := i - 1
+  Zobraz(i, "...")
+  i := i - 1
 }
 Zobraz(Map)`,
 }
