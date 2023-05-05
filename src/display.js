@@ -1,4 +1,4 @@
-import { ROBOT, ROCKET, PITFALL, ENERGY, ROCKET_X, ROCKET_Y } from './constants'
+import { ROBOT, ROCKET, CRATER, ENERGY, ROCKET_X, ROCKET_Y } from './constants'
 import stringify from './stringify'
 import map from './map'
 import robot from './robot'
@@ -90,7 +90,7 @@ function resetDisplay() {
 function mapValue(id) {
     return id === ROBOT ? 'robot' :
            id === ROCKET ? 'rocket' :
-           id === PITFALL ? 'pitfall' :
+           id === CRATER ? 'crater' :
            id === ENERGY ? 'energy' :
            'sand'
 }

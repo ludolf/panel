@@ -1,7 +1,7 @@
 import { lang } from 'ludolfc'
-import { SIZE, SAND, ROCKET, PITFALL, ENERGY, ROCKET_X, ROCKET_Y, ROBOT_X, ROBOT_Y } from './constants'
+import { SIZE, SAND, ROCKET, CRATER, ENERGY, ROCKET_X, ROCKET_Y, ROBOT_X, ROBOT_Y } from './constants'
 
-const PITFALL_COUNT = 10
+const CRATER_COUNT = 10
 const ENERGY_COUNT = 20
 
 const map = []
@@ -14,13 +14,13 @@ for (let i = 0; i < SIZE; i++) {
     }
 }
 
-// pitfalls
+// craters
 let i = 0
-while (i < PITFALL_COUNT) {
+while (i < CRATER_COUNT) {
     const x = randomInt(2, SIZE - 2)
     const y = randomInt(2, SIZE - 2)
     if (map[x][y] === SAND) {
-        map[x][y] = PITFALL 
+        map[x][y] = CRATER 
         i++        
     }   
 }
@@ -65,7 +65,7 @@ function random(x, y, value, def) {
             return !!Math.round(Math.random() - 0.3) ? value : def
         }
     } else
-    if (value === PITFALL) {  
+    if (value === CRATER) {  
         if (!(x > SIZE - 2 - 1 || x < 2 || y > SIZE - 2 - 1 || y < 2)) {
             return !!Math.round(Math.random() - 0.4) ? value : def
         }

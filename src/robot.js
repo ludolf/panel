@@ -1,5 +1,5 @@
 import { lang } from 'ludolfc'
-import { SIZE, SAND, ENERGY, PITFALL, ROBOT_X, ROBOT_Y } from './constants'
+import { SIZE, SAND, ENERGY, CRATER, ROBOT_X, ROBOT_Y } from './constants'
 import map from './map'
 
 const ENERGY_DEFAULT = 30
@@ -35,7 +35,7 @@ function beforeMove() {
 }
 
 function afterMove() {
-    if (PITFALL === map.raw[position.x][position.y]) status.trapped = true
+    if (CRATER === map.raw[position.x][position.y]) status.trapped = true
     updateEnergy(-ENERGY_MOVE)
 }
 

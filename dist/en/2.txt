@@ -1,9 +1,9 @@
-Pitfall := 30
+Crater := 30
 Energy := 40
 
-avoid_pitfall := () {
+avoid_crater := () {
   field := Map[Ludolf.position.x, Ludolf.position.y]
-  if field = Pitfall {
+  if field = Crater {
     Ludolf.avoid()
   }
 }
@@ -18,7 +18,7 @@ charge_energy := () {
 move_to := (x, y) {
   while Ludolf.position.x != x | Ludolf.position.y != y {
 
-    avoid_pitfall()
+    avoid_crater()
 
     if Ludolf.position.x > x {
       Ludolf.left()

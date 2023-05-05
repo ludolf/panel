@@ -3,7 +3,7 @@
     --black: #111111;
     --lighter: #fce8c4;
     --darker: #dfd4c3;
-    --pitfall: #c4bbdeff;
+    --crater: #c4bbdeff;
 }
 
 body {
@@ -228,7 +228,7 @@ textarea, code, pre, .errorMarker, #result {
 }
 #map .map-value-robot.trapped {
     transform: rotate(90deg);
-    background-color: var(--pitfall);
+    background-color: var(--crater);
     border-top: 0.2rem solid white;
     border-bottom: 0;
 }
@@ -243,9 +243,9 @@ textarea, code, pre, .errorMarker, #result {
 #map .map-value-rocket {
     background-image: url('rocket.svg');
 }
-#map .map-value-pitfall {
+#map .map-value-crater {
     /*background-color: indigo;*/
-    background-image: url('pitfall.svg');
+    background-image: url('crater.svg');
 }
 #map td:not(:last-child) {
     border-right: 0.2rem solid white;
