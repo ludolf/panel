@@ -107,7 +107,7 @@ codeTextarea.addEventListener('mouseup', event => calculatePosition())
 controlChars.forEach(el => el.addEventListener('click', event => insertCode(el.innerHTML)))
 
 function insertCode(toInsert) {
-    toInsert = toInsert.replace('&lt;', '<').replace('&gt;', '>')
+    toInsert = toInsert.replace('&lt;', '<').replace('&gt;', '>').replace('&amp;', '&')
     const start = codeTextarea.selectionStart
     const end = codeTextarea.selectionEnd
     codeTextarea.value = codeTextarea.value.substring(0, start) + toInsert + codeTextarea.value.substring(end)
