@@ -1,9 +1,9 @@
-Falle := 30
+Krater := 30
 Energie := 40
 
-falle_vermeiden := () {
+krater_vermeiden := () {
   feld := Karte[Ludolf.position.x, Ludolf.position.y]
-  falls feld = Falle {
+  falls feld = Krater {
     Ludolf.vermeiden()
   }
 }
@@ -18,7 +18,7 @@ energie_aufladen := () {
 bewegen_auf := (x, y) {
   solange Ludolf.position.x != x | Ludolf.position.y != y {
 
-    falle_vermeiden()
+    krater_vermeiden()
 
     falls Ludolf.position.x > x {
       Ludolf.links()
@@ -45,15 +45,15 @@ Anzeigen("Zur Energie")
 
 ebene := 0
 
-unten := 0
-links := 0
-oben := Karte.größe - 1
+unten  := 0
+links  := 0
+oben   := Karte.größe - 1
 rechts := Karte.größe - 1
 
 solange ebene < 2 {
   ebene := ebene + 1
 
-  // nach oben
+  // nach oben bewegen
   y := unten
   solange y <= oben {
     Ludolf.hoch()
@@ -62,7 +62,7 @@ solange ebene < 2 {
   }
   links := links + 1
 
-  // nach rechts
+  // nach rechts bewegen
   x := links
   solange x <= rechts {
     Ludolf.rechts()
@@ -71,7 +71,7 @@ solange ebene < 2 {
   }
   oben := oben - 1
 
-  // nach unten
+  // nach unten bewegen
   y := oben
   solange y >= unten {
     Ludolf.runter()
@@ -80,7 +80,7 @@ solange ebene < 2 {
   }
   rechts := rechts - 1
 
-  // nach links
+  // nach links bewegen
   x := rechts
   solange x >= links {
     Ludolf.links()

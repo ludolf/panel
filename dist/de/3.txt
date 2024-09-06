@@ -1,9 +1,9 @@
-Falle := 30
+Krater := 30
 Energie := 40
 
-falle_vermeiden := () {
+krater_vermeiden := () {
   feld := Karte[Ludolf.position.x, Ludolf.position.y]
-  falls feld = Falle {
+  falls feld = Krater {
     Ludolf.vermeiden()
   }
 }
@@ -18,7 +18,7 @@ energie_aufladen := () {
 bewegen_auf := (x, y) {
   solange Ludolf.position.x != x | Ludolf.position.y != y {
 
-    falle_vermeiden()
+    krater_vermeiden()
 
     falls Ludolf.position.x > x {
       Ludolf.links()
